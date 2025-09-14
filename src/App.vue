@@ -1,30 +1,28 @@
+<script setup>
+
+// If you are using PurgeCSS, make sure to whitelist the carousel CSS classes
+import 'vue3-carousel/carousel.css'
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+
+const carouselConfig = JSON.parse(atob(window.asoneConfig));
+
+let dataHTML = JSON.parse(atob(window.asoneDataHTML));
+
+
+</script>
+
 <template>
-  <!-- use vue3 and bootstrap 4 to create a blogpost. The post data is read from a json file. The main page display the title, data, author, image, summary and a read more link to read the content
-  -->
+  <Carousel v-bind="carouselConfig">
+    <Slide v-for="data in dataHTML" :key="data">
+      <div class="carousel__item">
 
-  <router-view v-slot="slotProps">
-    <transition name="fade" mode="out-in">
-      <component  :is="slotProps.Component"></component>
-    </transition>
-  </router-view>
+        <div v-html="data['html']"></div>
+      </div>
+    </Slide>
+
+    <template #addons>
+      <Navigation />
+      <Pagination />
+    </template>
+  </Carousel>
 </template>
-<style lang="css">
-
-.fade-enter-from,
-.fade-button-leave-to {
-  opacity: 0;
-}   
-      
-.fade-enter-active {
-  transition: opacity 0.3s ease-out;
-}   
-      
-.fade-leave-active {
-  transition: opacity 0.3s ease-in;
-}   
-    
-.fade-enter-to,
-.fade-leave-from {
-  opacity: 1;
-}     
-</style>
