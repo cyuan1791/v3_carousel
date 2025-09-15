@@ -9,6 +9,7 @@ const carouselConfig = JSON.parse(atob(window.asoneConfig));
 let dataHTML = JSON.parse(atob(window.asoneDataHTML));
 
 
+
 </script>
 
 <template>
