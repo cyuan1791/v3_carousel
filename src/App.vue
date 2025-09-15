@@ -8,8 +8,17 @@ const carouselConfig = JSON.parse(atob(window.asoneConfig));
 
 let dataHTML = JSON.parse(atob(window.asoneDataHTML));
 
+let useNav = true;
+let usePagination = true;
 
-
+if ("vueOpts" in carouselConfig) {
+  if ("useNav" in carouselConfig.vueOpts) {
+    useNav = carouselConfig.vueOpts.useNav;
+  }
+  if ("usePagination" in carouselConfig.vueOpts) {
+    usePagination = carouselConfig.vueOpts.usePagination;
+  }
+}
 </script>
 
 <template>
@@ -22,8 +31,8 @@ let dataHTML = JSON.parse(atob(window.asoneDataHTML));
     </Slide>
 
     <template #addons>
-      <Navigation />
-      <Pagination />
+      <Navigation v-if="useNav" />
+      <Pagination v-if="usePagination" />
     </template>
   </Carousel>
 </template>
